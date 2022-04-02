@@ -20,7 +20,7 @@ const RandomPlanet = () => {
     updatePlanet()
     const meka = setInterval(() => {
       updatePlanet()
-    }, 1000)
+    }, 3000)
 
     return () => clearInterval(meka)
   }, [])

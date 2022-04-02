@@ -1,14 +1,11 @@
-
 import React, { Component, useState, useEffect } from 'react';
-import SwapiService from '../../services/swapi-service';
 
 import './item-list.css';
 
-const ItemList = () => {
+const ItemList = ({setSelectedItemId, swapi }) => {
   const [state, setState] = useState([]);
   const {data} = state;
 
-  const swapi = new SwapiService();
 
   useEffect(() => {
     swapi.getAllPeople().then((data) => {
@@ -20,7 +17,7 @@ const ItemList = () => {
 
   const content = state.map(item => {
     return (
-      <li id={item.id} className="list-group-item">
+      <li key={item.id} onClick={() => setSelectedItemId(item.id)} className="list-group-item">
         {item.name}
       </li>
     )

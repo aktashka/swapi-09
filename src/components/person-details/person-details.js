@@ -1,23 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import SwapiService from '../../services/swapi-service';
 import './person-details.css';
 
 
-const PersonDetails = () => {
+const PersonDetails = ({selectedItemId, swapi}) => {
   const [state, setState] = useState({});
     const {id, name, gender, birthYear, eyeColor} = state;
     const imgUrl = `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`
 
-    const swapi = new SwapiService();
-
     useEffect(() => {
       const updatePerson = () => {
-        swapi.getPerson(1).then(data => {
+        swapi.getPerson(selectedItemId).then(data => {
           setState(data)
         })
       }
       updatePerson()
-    }, [])
+    }, [selectedItemId])
 
   return (
     <div className="person-details card">
