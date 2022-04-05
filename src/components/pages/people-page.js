@@ -1,32 +1,15 @@
-import React, {useState} from 'react';
-
-import ItemList from '../item-list';
-import PersonDetails from '../person-details';
-import { Consumer } from '../swapi-context';
-import Row from '../row'
-
+import React, {useState} from "react";
+import { PeopleList, PersonDetails } from "../sw-components";
+import Row from "../row";
 
 const PeoplePage = () => {
-  const [selectedItemId, setSelectedItemId] = useState(1)
+    const [selectedItemId, setSelectedItemId] = useState(1)
+    const leftElem = <PeopleList setSelectedItemId={setSelectedItemId} /> 
+    const rightElem =  <PersonDetails selectedItemId={selectedItemId} />
+    
+    return (
+    <Row left={leftElem} right={rightElem}/>
+    )
+}
 
-  const leftElement = (
-  <Consumer>
-    {(swapi) => {
-      return <ItemList swapi={swapi} setSelectedItemId={setSelectedItemId}/>
-    }}
-  </Consumer>
-  )
-
-  const rightElement = (
-    <Consumer>
-    {(swapi) => {
-      return <PersonDetails swapi={swapi} selectedItemId={selectedItemId}/>
-    }}
-  </Consumer> 
-  )
-
-  return <Row left={leftElement} right={rightElement}/>
-
-};
-
-export default PeoplePage;
+export {PeoplePage};
